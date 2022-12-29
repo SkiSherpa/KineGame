@@ -1,2 +1,5 @@
+import generateTarget from './targetGen.js';
 
-// room for new stuff
+const target = new generateTarget;
+
+export default target;
