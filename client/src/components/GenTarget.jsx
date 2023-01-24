@@ -5,11 +5,10 @@ class GenTarget extends React.Component {
     super(props)
     this.state = {
       boardSize: props.boardSize,
-      targetCoor: props.targetCoor
+      targetCoor: this.props.targetCoor
     }
   }
-  // !!! NOW, the page isn't displaying the target coor. The state here, is boardSize: 0, targetCoor: undefined
-  // gen correct target coor in console
+
   render () {
     return (
       <div>
