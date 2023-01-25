@@ -1,20 +1,22 @@
+import './styles.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import GenBoard from './components/GenBoard.jsx';
 import UserInput from './components/UserInput.jsx';
 import GenTarget from './components/GenTarget.jsx';
-import '../styles.css';
+
 
 class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
       boardSize: 0,
-      targetCoor: [0, 0]
+      targetCoor: [0, 0],
+      rowArray: []
     }
     this.selectBoardSize = this.selectBoardSize.bind(this);
     this.generateNewTarget = this.generateNewTarget.bind(this);
-    this.generateBoardView = this.generateBoardView.bind(this);
+    this.genRowArray = this.genRowArray.bind(this);
   }
 
   // setting the boardSize state
@@ -41,9 +43,12 @@ class App extends React.Component {
     this.setState({targetCoor: newTargetCoor});
   }
 
-  // generate a boardView
-  generateBoardView(boardSize) {
-
+  // genRowArray - gen an array with boardsize as length of array
+  genRowArray(boardSize) {
+    // gen array of length boardSize
+    // array filled with index values
+    var newRowArray = Array(boardSize).fill(null).map((_, i) => i);
+    this.setState({rowArray: newRowArray});
   }
 
   render () {
@@ -53,7 +58,7 @@ class App extends React.Component {
         <GenTarget boardSize={this.state.boardSize} targetCoor={this.state.targetCoor}/>
         <UserInput />
         <div className="game-board">
-          <GenBoard selectBoardSize={this.selectBoardSize} generateNewTarget={this.generateNewTarget}/>
+          <GenBoard genRowArray={this.genRowArray} rowArray={this.state.rowArray} selectBoardSize={this.selectBoardSize} generateNewTarget={this.generateNewTarget}/>
         </div>
 
       </div>

@@ -23,12 +23,13 @@ class GenBoard extends React.Component {
   //
   handleSubmit(event) {
     event.preventDefault();
-    console.log('hit', this.state.boardSize);
+    console.log('handleSubmit', this.state.boardSize);
     this.props.selectBoardSize(this.state.boardSize);
     this.props.generateNewTarget(this.state.boardSize);
+    this.props.genRowArray(this.state.boardSize);
   }
   renderSquare(i) {
-    return <Square />;
+    return <Square value={i}/>;
   }
 
   render () {
@@ -38,11 +39,20 @@ class GenBoard extends React.Component {
         <form>
           <label>
             <p>select board size</p>
-            <input type='number' name='boardSize' min='1' max='10' value={this.state.value} onChange={this.handleChange}/>
+            <input type='number' name='boardSize' value={this.state.value} onChange={this.handleChange}/>
           </label>
           <button type='submit' onClick={this.handleSubmit}>Create New Board & Target</button>
         </form>
         <div className="status"></div>
+
+        <div className='board-row'>
+          {/* use the boardArray from props to gen an arr of arr for board */}
+          {/* use map cause we have an existing array in props "boardArray" has dummy index values */}
+          {/* {this.props.rowArray.map(() => {
+            return <Square value={i}/>;
+          })} */}
+        </div>
+
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
