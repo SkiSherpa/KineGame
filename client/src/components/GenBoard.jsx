@@ -46,11 +46,9 @@ class GenBoard extends React.Component {
         <div className="status"></div>
 
         <div className='board-row'>
-          {/* use the boardArray from props to gen an arr of arr for board */}
-          {/* use map cause we have an existing array in props "boardArray" has dummy index values */}
-          {/* {this.props.rowArray.map(() => {
+          {this.props.rowArray.map((_, i) => {
             return <Square value={i}/>;
-          })} */}
+          })}
         </div>
 
         <div className="board-row">
