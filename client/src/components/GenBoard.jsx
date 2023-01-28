@@ -1,6 +1,5 @@
 // To start a board size of 2x2
 import React from 'react';
-import GenTarget from './GenTarget.jsx';
 import Square from './Square.jsx';
 
 class GenBoard extends React.Component {
@@ -17,19 +16,25 @@ class GenBoard extends React.Component {
   // setting the state of boardSize from user IP
   handleChange(event) {
     var value = Number.parseInt(event.target.value);
-    console.log('handleCHange', value);
     this.setState({boardSize: value});
   }
   //
   handleSubmit(event) {
     event.preventDefault();
-    console.log('handleSubmit', this.state.boardSize);
     this.props.selectBoardSize(this.state.boardSize);
     this.props.generateNewTarget(this.state.boardSize);
-    this.props.genRowArray(this.state.boardSize);
+    // this.props.genBoardArray(
+    //   this.props.genRowArray(this.state.boardSize)
+    // );
+    this.props.genRowArrayAndBoard(this.state.boardSize);
+    // !!!- not passing the newly gen rowArray from ^^
+    // state of the boardArray is not being saved, but is being rendered
+    // console.log('after genRowArray, rowArray:', this.props.rowArray);
+    // this.props.genBoardArray(this.props.rowArray, this.state.boardSize);
   }
+
   renderSquare(i) {
-    return <Square value={i}/>;
+    return <Square value={i} key={i}/>;
   }
 
   render () {
@@ -45,13 +50,19 @@ class GenBoard extends React.Component {
         </form>
         <div className="status"></div>
 
-        <div className='board-row'>
-          {this.props.rowArray.map((_, i) => {
-            return <Square value={i}/>;
+        <div>
+          {this.props.board.map(() => {
+            return (
+              <div className='board-row'>
+                {this.props.rowArray.map((_, i) => {
+                  return <Square value={i} key={i}/>;
+                })}
+              </div>
+            )
           })}
         </div>
 
-        <div className="board-row">
+        {/* <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
@@ -65,7 +76,7 @@ class GenBoard extends React.Component {
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-        </div>
+        </div> */}
 
       </div>
 

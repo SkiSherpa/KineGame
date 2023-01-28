@@ -18,11 +18,12 @@ let ytarget = (board) => {
 }
 
 class generateTarget {
-  constructor (xtarget, ytarget) {
-    this.xtarget = xtarget;
-    this.ytarget = ytarget;
+  constructor (xtarget, ytarget, board) {
+    // want to instantiate a new set a of target coordinate each time
+    this.xtarget = new xtarget(board);
+    this.ytarget = new ytarget(board);
   }
 }
 
-console.log( `(${xtarget(board)}, ${ytarget(board)})`);
+`(${xtarget(board)}, ${ytarget(board)})`;
 

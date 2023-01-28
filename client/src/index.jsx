@@ -12,44 +12,45 @@ class App extends React.Component {
     this.state = {
       boardSize: 0,
       targetCoor: [0, 0],
-      rowArray: []
+      rowArray: [],
+      board: []
     }
     this.selectBoardSize = this.selectBoardSize.bind(this);
     this.generateNewTarget = this.generateNewTarget.bind(this);
-    this.genRowArray = this.genRowArray.bind(this);
+    this.genRowArrayAndBoard = this.genRowArrayAndBoard.bind(this);
   }
 
   // setting the boardSize state
   selectBoardSize(newSize) {
-    console.log('index newSize', newSize);
     this.setState({
       boardSize: newSize
     })
-    // this.setState((state) => {
-    //   return {
-    //   boardSize: newSize,
-    //   targetCoor: [0, 0]
-    //   }
-    // });
-    // ^^ happens if you want to change more than one key/val pair
   }
   // generating a new traget Coor from the choosen boardSize
   generateNewTarget(boardSize) {
     var randomY = Math.floor(Math.random()*(boardSize))
     var x = boardSize;
-    // change the state for targetCoor to the ones above
     var newTargetCoor = [x, randomY];
-    console.log('new Target Coor:', newTargetCoor);
     this.setState({targetCoor: newTargetCoor});
   }
 
-  // genRowArray - gen an array with boardsize as length of array
-  genRowArray(boardSize) {
-    // gen array of length boardSize
-    // array filled with index values
+  // genRowArray - gen row array of length boardSize
+  genRowArrayAndBoard(boardSize) {
     var newRowArray = Array(boardSize).fill(null).map((_, i) => i);
-    this.setState({rowArray: newRowArray});
+    this.setState({rowArray: newRowArray}, () => {
+      this.setState({
+        board: Array(boardSize).fill(this.state.rowArray).map((_, i) => this.state.rowArray)
+      })
+    });
+    // var newBoard = this.state.rowArray.map(function () {
+    //   console.log('!', this.state.rowArray);
+    //   return Array(boardSize).fill(this.state.rowArray).map((_, i) => i);
+    // });
+    // console.log('newBoard:', newBoard);
+    // this.setState({board: newBoard});
   }
+
+
 
   render () {
     return (
@@ -58,7 +59,14 @@ class App extends React.Component {
         <GenTarget boardSize={this.state.boardSize} targetCoor={this.state.targetCoor}/>
         <UserInput />
         <div className="game-board">
-          <GenBoard genRowArray={this.genRowArray} rowArray={this.state.rowArray} selectBoardSize={this.selectBoardSize} generateNewTarget={this.generateNewTarget}/>
+          <GenBoard
+            genRowArrayAndBoard={this.genRowArrayAndBoard}
+            genRowArray={this.genRowArray}
+            selectBoardSize={this.selectBoardSize}
+            generateNewTarget={this.generateNewTarget}
+            board={this.state.board}
+            rowArray={this.state.rowArray}
+          />
         </div>
 
       </div>
