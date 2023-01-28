@@ -20,15 +20,15 @@ ol, ul {
 }
 
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background: rgb(208, 202, 199);
+  /* border: 0px solid #999; */
   float: left;
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
   height: 100px;
-  margin-right: -1px;
-  margin-top: -1px;
+  /* margin-right: -1px;
+  margin-top: 0px; */
   padding: 0;
   text-align: center;
   width: 100px;
@@ -38,9 +38,9 @@ ol, ul {
   outline: none;
 }
 
-.kbd-navigation .square:focus {
+/* .kbd-navigation .square:focus {
   background: #ddd;
-}
+} */
 
 .game {
   flex-direction: row;
@@ -49,3 +49,4 @@ ol, ul {
 .game-info {
   margin-left: 20px;
 }
+

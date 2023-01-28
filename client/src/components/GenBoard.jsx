@@ -1,4 +1,3 @@
-// To start a board size of 2x2
 import React from 'react';
 import Square from './Square.jsx';
 
@@ -18,23 +17,16 @@ class GenBoard extends React.Component {
     var value = Number.parseInt(event.target.value);
     this.setState({boardSize: value});
   }
-  //
+
   handleSubmit(event) {
     event.preventDefault();
     this.props.selectBoardSize(this.state.boardSize);
     this.props.generateNewTarget(this.state.boardSize);
-    // this.props.genBoardArray(
-    //   this.props.genRowArray(this.state.boardSize)
-    // );
     this.props.genRowArrayAndBoard(this.state.boardSize);
-    // !!!- not passing the newly gen rowArray from ^^
-    // state of the boardArray is not being saved, but is being rendered
-    // console.log('after genRowArray, rowArray:', this.props.rowArray);
-    // this.props.genBoardArray(this.props.rowArray, this.state.boardSize);
-  }
+    }
 
-  renderSquare(i) {
-    return <Square value={i} key={i}/>;
+  renderSquare(i, j) {
+    return <Square value={`(${i}, ${j})`}/>;
   }
 
   render () {
@@ -51,11 +43,11 @@ class GenBoard extends React.Component {
         <div className="status"></div>
 
         <div>
-          {this.props.board.map(() => {
+          {this.props.board.map((_, j) => {
             return (
               <div className='board-row'>
                 {this.props.rowArray.map((_, i) => {
-                  return <Square value={i} key={i}/>;
+                  return <Square value={`(${i}, ${j})`}/>;
                 })}
               </div>
             )
