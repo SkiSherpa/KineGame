@@ -42,12 +42,12 @@ class GenBoard extends React.Component {
         </form>
         <div className="status"></div>
 
-        <div>
+        <div className='board'>
           {this.props.board.map((_, j) => {
             return (
               <div className='board-row'>
                 {this.props.rowArray.map((_, i) => {
-                  return <Square value={`(${i}, ${j})`}/>;
+                  return <Square value={`(${i}, ${this.state.boardSize - j - 1})`}/>;
                 })}
               </div>
             )

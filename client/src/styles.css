@@ -9,6 +9,14 @@ ol, ul {
   padding-left: 30px;
 }
 
+/* .game-board {
+  display: flex;
+  flex-direction: column-reverse;
+} */
+
+
+
+/* must be here for rows to remain as rows */
 .board-row:after {
   clear: both;
   content: "";
@@ -20,7 +28,7 @@ ol, ul {
 }
 
 .square {
-  background: rgb(208, 202, 199);
+  background: rgb(94, 89, 86);
   /* border: 0px solid #999; */
   float: left;
   font-size: 24px;
@@ -34,19 +42,20 @@ ol, ul {
   width: 100px;
 }
 
-.square:focus {
+/* .square:focus {
   outline: none;
-}
+} */
 
 /* .kbd-navigation .square:focus {
   background: #ddd;
 } */
 
-.game {
-  flex-direction: row;
-}
+/* .game {
+  display: flex;
+  flex-direction: column;
+} */
 
-.game-info {
+/* .game-info {
   margin-left: 20px;
-}
+} */
 

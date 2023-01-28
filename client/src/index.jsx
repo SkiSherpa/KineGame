@@ -37,17 +37,12 @@ class App extends React.Component {
   // genRowArray - gen row array of length boardSize
   genRowArrayAndBoard(boardSize) {
     var newRowArray = Array(boardSize).fill(null).map((_, i) => i);
+    // setState has the optional cb as a 2nd parameter
     this.setState({rowArray: newRowArray}, () => {
       this.setState({
         board: Array(boardSize).fill(this.state.rowArray).map((_, i) => this.state.rowArray)
       })
     });
-    // var newBoard = this.state.rowArray.map(function () {
-    //   console.log('!', this.state.rowArray);
-    //   return Array(boardSize).fill(this.state.rowArray).map((_, i) => i);
-    // });
-    // console.log('newBoard:', newBoard);
-    // this.setState({board: newBoard});
   }
 
 
@@ -56,7 +51,10 @@ class App extends React.Component {
     return (
       <div className="game">
         <h1>Learning Physics and Math</h1>
-        <GenTarget boardSize={this.state.boardSize} targetCoor={this.state.targetCoor}/>
+        <GenTarget
+          boardSize={this.state.boardSize}
+          targetCoor={this.state.targetCoor}
+        />
         <UserInput />
         <div className="game-board">
           <GenBoard
