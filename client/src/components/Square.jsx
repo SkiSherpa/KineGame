@@ -4,7 +4,7 @@ class Square extends React.Component {
   render() {
     return (
       <button className="square">
-        {this.props.value}
+        <p className="coorText">{this.props.value} </p>
       </button>
     );
   }

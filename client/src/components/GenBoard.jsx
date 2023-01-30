@@ -53,7 +53,6 @@ class GenBoard extends React.Component {
             )
           })}
         </div>
-
         {/* <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
