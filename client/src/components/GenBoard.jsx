@@ -26,7 +26,7 @@ class GenBoard extends React.Component {
     }
 
   renderSquare(i, j) {
-    return <Square value={`(${i}, ${j})`}/>;
+    return <Square squareCoor={`(${i}, ${j})`}/>;
   }
 
   render () {
@@ -47,7 +47,7 @@ class GenBoard extends React.Component {
             return (
               <div className='board-row'>
                 {this.props.rowArray.map((_, i) => {
-                  return <Square value={`(${i}, ${this.state.boardSize - j - 1})`}/>;
+                  return <Square squareCoor={`(${i}, ${this.state.boardSize - j - 1})`}/>;
                 })}
               </div>
             )
