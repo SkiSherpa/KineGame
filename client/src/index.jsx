@@ -22,6 +22,7 @@ class App extends React.Component {
 
   // setting the boardSize state
   selectBoardSize(newSize) {
+    console.log('can we push to github fork');
     this.setState({
       boardSize: newSize
     })
