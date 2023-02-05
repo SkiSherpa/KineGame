@@ -9,22 +9,26 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      boardSize: 0,
-      targetCoor: [0, 0],
-      rowArray: [],
-      board: []
+      didWin: 0,
     }
-
+    this.updateDidWin = this.updateDidWin.bind(this);
   }
-
-
+  updateDidWin(ip) {
+    console.log('update hit');
+    if (ip !== 'MISS') {
+      var newWinCount = this.state.didWin;
+      newWinCount++;
+      this.setState({didWin: newWinCount});
+    }
+  }
 
   render () {
     return (
       <div className="game">
         <h1>Learning Physics and Math</h1>
+        <div>How many times you hit the target: {this.state.didWin}</div>
         <div className="game-board">
-          <GenBoard/>
+          <GenBoard updateDidWin={this.updateDidWin}/>
         </div>
 
       </div>

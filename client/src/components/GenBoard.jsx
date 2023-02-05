@@ -6,19 +6,22 @@ class GenBoard extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
-      target: 10
+      target: 10,
+      status: ''
     }
     this.handleClick = this.handleClick.bind(this);
     this.renderSquare = this.renderSquare.bind(this);
     this.genTarget = this.genTarget.bind(this);
+    this.verifyHit = this.verifyHit.bind(this);
   }
 
   handleClick(i) {
     const squares = this.state.squares.slice();
     squares[i] = 'C';
-    this.setState({squares: squares});
+    this.setState({squares: squares}, this.verifyHit);
   }
   genTarget() {
+    this.setState({squares: Array(9).fill(null)});
     const targets = [2, 5, 8];
     let random = Math.floor(Math.random() * 3);
     console.log(targets[random]);
@@ -27,6 +30,35 @@ class GenBoard extends React.Component {
       newSquares[this.state.target] = 'X';
       this.setState({squares: newSquares});
     });
+  }
+
+  verifyHit() {
+    console.log('verify hit');
+    if (this.state.squares[0] === 'C' || this.state.squares[1] === 'C') {
+      if (this.state.squares[2] === 'X') {
+        this.setState({status: `You've hit the target!`});
+        this.props.updateDidWin('hit');
+      } else {
+        this.setState({status: `MISS`});
+        this.props.updateDidWin('MISS');
+      }
+    } else if (this.state.squares[3] === 'C' || this.state.squares[4] === 'C') {
+      if (this.state.squares[5] === 'X') {
+        this.setState({status: `You've hit the target!`});
+        this.props.updateDidWin('hit');
+      } else {
+        this.setState({status: `MISS`});
+        this.props.updateDidWin('MISS');
+      }
+    } else if (this.state.squares[6] === 'C' || this.state.squares[7] === 'C') {
+      if (this.state.squares[8] === 'X') {
+        this.setState({status: `You've hit the target!`});
+        this.props.updateDidWin('hit');
+      } else {
+        this.setState({status: `MISS`});
+        this.props.updateDidWin('MISS');
+      }
+    }
   }
 
   renderSquare(i) {
@@ -41,7 +73,7 @@ class GenBoard extends React.Component {
   render () {
     return (
       <div>
-        <div className="status"></div>
+        <div className="status">{this.state.status}</div>
         <button onClick={() => this.genTarget()}>Generate Target</button>
         <div className="board-row">
           {this.renderSquare(0)}
@@ -58,12 +90,9 @@ class GenBoard extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
-
       </div>
-
     )
   }
-
 }
 
 export default GenBoard;
