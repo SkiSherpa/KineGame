@@ -5,55 +5,45 @@ class GenBoard extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      boardSize: 0,
-      targetCoor: [0, 0]
+      squares: Array(9).fill(null),
+      target: 10
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.renderSquare = this.renderSquare.bind(this);
-  }
-  // setting the state of boardSize from user IP
-  handleChange(event) {
-    var value = Number.parseInt(event.target.value);
-    this.setState({boardSize: value});
+    this.genTarget = this.genTarget.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.selectBoardSize(this.state.boardSize);
-    this.props.generateNewTarget(this.state.boardSize);
-    this.props.genRowArrayAndBoard(this.state.boardSize);
-    }
+  handleClick(i) {
+    const squares = this.state.squares.slice();
+    squares[i] = 'C';
+    this.setState({squares: squares});
+  }
+  genTarget() {
+    const targets = [2, 5, 8];
+    let random = Math.floor(Math.random() * 3);
+    console.log(targets[random]);
+    this.setState({target: targets[random]}, () => {
+      var newSquares = this.state.squares.slice();
+      newSquares[this.state.target] = 'X';
+      this.setState({squares: newSquares});
+    });
+  }
 
-  renderSquare(i, j) {
-    return <Square squareCoor={`(${i}, ${j})`}/>;
+  renderSquare(i) {
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+      />
+    );
   }
 
   render () {
     return (
       <div>
-
-        <form>
-          <label>
-            <p>select board size</p>
-            <input type='number' name='boardSize' value={this.state.value} onChange={this.handleChange}/>
-          </label>
-          <button type='submit' onClick={this.handleSubmit}>Create New Board & Target</button>
-        </form>
         <div className="status"></div>
-
-        <div className='board'>
-          {this.props.board.map((_, j) => {
-            return (
-              <div className='board-row'>
-                {this.props.rowArray.map((_, i) => {
-                  return <Square squareCoor={`(${i}, ${this.state.boardSize - j - 1})`}/>;
-                })}
-              </div>
-            )
-          })}
-        </div>
-        {/* <div className="board-row">
+        <button onClick={() => this.genTarget()}>Generate Target</button>
+        <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
@@ -67,7 +57,7 @@ class GenBoard extends React.Component {
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-        </div> */}
+        </div>
 
       </div>
 

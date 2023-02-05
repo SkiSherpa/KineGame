@@ -2,8 +2,7 @@ import './styles.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import GenBoard from './components/GenBoard.jsx';
-import UserInput from './components/UserInput.jsx';
-import GenTarget from './components/GenTarget.jsx';
+
 
 
 class App extends React.Component {
@@ -15,35 +14,7 @@ class App extends React.Component {
       rowArray: [],
       board: []
     }
-    this.selectBoardSize = this.selectBoardSize.bind(this);
-    this.generateNewTarget = this.generateNewTarget.bind(this);
-    this.genRowArrayAndBoard = this.genRowArrayAndBoard.bind(this);
-  }
 
-  // setting the boardSize state
-  selectBoardSize(newSize) {
-    console.log('can we push to github fork');
-    this.setState({
-      boardSize: newSize
-    })
-  }
-  // generating a new traget Coor from the choosen boardSize
-  generateNewTarget(boardSize) {
-    var randomY = Math.floor(Math.random()*(boardSize))
-    var x = boardSize;
-    var newTargetCoor = [x, randomY];
-    this.setState({targetCoor: newTargetCoor});
-  }
-
-  // genRowArray - gen row array of length boardSize
-  genRowArrayAndBoard(boardSize) {
-    var newRowArray = Array(boardSize).fill(null).map((_, i) => i);
-    // setState has the optional cb as a 2nd parameter
-    this.setState({rowArray: newRowArray}, () => {
-      this.setState({
-        board: Array(boardSize).fill(this.state.rowArray).map((_, i) => this.state.rowArray)
-      })
-    });
   }
 
 
@@ -52,20 +23,8 @@ class App extends React.Component {
     return (
       <div className="game">
         <h1>Learning Physics and Math</h1>
-        <GenTarget
-          boardSize={this.state.boardSize}
-          targetCoor={this.state.targetCoor}
-        />
-        <UserInput />
         <div className="game-board">
-          <GenBoard
-            genRowArrayAndBoard={this.genRowArrayAndBoard}
-            genRowArray={this.genRowArray}
-            selectBoardSize={this.selectBoardSize}
-            generateNewTarget={this.generateNewTarget}
-            board={this.state.board}
-            rowArray={this.state.rowArray}
-          />
+          <GenBoard/>
         </div>
 
       </div>
