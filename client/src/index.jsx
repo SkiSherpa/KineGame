@@ -26,6 +26,7 @@ class App extends React.Component {
     return (
       <div className="game">
         <h1>Learning Physics and Math</h1>
+        <h2>An X marks the target to hit. Your cannons only fire in horizontal straight lines.</h2>
         <div>How many times you hit the target: {this.state.didWin}</div>
         <div className="game-board">
           <GenBoard updateDidWin={this.updateDidWin}/>

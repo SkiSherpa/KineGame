@@ -36,26 +36,26 @@ class GenBoard extends React.Component {
     console.log('verify hit');
     if (this.state.squares[0] === 'C' || this.state.squares[1] === 'C') {
       if (this.state.squares[2] === 'X') {
-        this.setState({status: `You've hit the target!`});
+        this.setState({status: `hit the target!`});
         this.props.updateDidWin('hit');
       } else {
-        this.setState({status: `MISS`});
+        this.setState({status: `MISSED`});
         this.props.updateDidWin('MISS');
       }
     } else if (this.state.squares[3] === 'C' || this.state.squares[4] === 'C') {
       if (this.state.squares[5] === 'X') {
-        this.setState({status: `You've hit the target!`});
+        this.setState({status: `hit the target!`});
         this.props.updateDidWin('hit');
       } else {
-        this.setState({status: `MISS`});
+        this.setState({status: `MISSED`});
         this.props.updateDidWin('MISS');
       }
     } else if (this.state.squares[6] === 'C' || this.state.squares[7] === 'C') {
       if (this.state.squares[8] === 'X') {
-        this.setState({status: `You've hit the target!`});
+        this.setState({status: `hit the target!`});
         this.props.updateDidWin('hit');
       } else {
-        this.setState({status: `MISS`});
+        this.setState({status: `MISSED`});
         this.props.updateDidWin('MISS');
       }
     }
@@ -73,7 +73,7 @@ class GenBoard extends React.Component {
   render () {
     return (
       <div>
-        <div className="status">{this.state.status}</div>
+        <div className="status">You {this.state.status}</div>
         <button onClick={() => this.genTarget()}>Generate Target</button>
         <div className="board-row">
           {this.renderSquare(0)}
