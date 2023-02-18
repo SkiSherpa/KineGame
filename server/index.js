@@ -15,15 +15,7 @@ app.use(express.urlencoded({ extended: false })); //-> for recognizing requests 
   // so '/save must also be present in reactland
 app.post('/save', function (req, res) {
   // Its (req, res), and req.body, not res.body
-  console.log('serverland, req.body ', req.body);
-  // need to access req.body to save to db -> coming back undefined
-  saveData(req.body)
-  // .then(() => {
-  //   res.send();
-  // })
-  // .catch( err => {
-  //   console.log('err after saveData, err:', err);
-  // })
+  saveData(req.body);
   res.send();
 })
 // you weren't giving an end to ^^, res.send() was the key thing missing
