@@ -49,8 +49,8 @@ class App extends React.Component {
     axios
       .post('/save', userData)
       .then((res) => {
-        console.log('player data saved');
-        console.log('res.body: ', res.body);
+
+        console.log('Reacland, res.config.data: ', res.config.data);
       })
       .catch(err => {
         console.log('Error in react, ', err);
