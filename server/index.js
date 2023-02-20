@@ -1,6 +1,7 @@
 var express = require('express');
 let app = express();
 const {User} = require('./../db/index.js');
+const {getData} = require('./../db/index.js');
 const {saveData} = require('./../db/index.js');
 
 // app.use alway a middlewear - things to do for every req
@@ -19,6 +20,14 @@ app.post('/save', function (req, res) {
   res.send();
 })
 // you weren't giving an end to ^^, res.send() was the key thing missing
+app.get('/getPastData', function (req, res) {
+  console.log('GET req1: ', req);
+  getData()
+  .then((savedPlayerData) => {
+    res.send(savedPlayerData);
+  })
+  .catch( err => console.log('Err in Get, server, err: ', err))
+});
 
 app.listen(3333, function() {
   console.log('Server started and listening on port 3333');

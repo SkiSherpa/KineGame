@@ -15,7 +15,7 @@ const UserSchema = new Schema({
 const User = mongoose.model('Users', UserSchema);
 // a save fn to save the data
 let saveData = (playerData) => {
-  console.log(playerData); //-> {didWin:0, player:''}
+  // console.log(playerData); //-> {didWin:0, player:''}
   const newPlayerData = new User({
     username: playerData.player,
     wins: playerData.didWin
@@ -24,11 +24,14 @@ let saveData = (playerData) => {
     if (err) {
       return console.log('db, newPlayer.save, err', err);
     }
-    console.log('res', res);
-
   })
+}
 
+// get past player data from db
+let getData = () => {
+  return User.find();
 }
 
 module.exports.saveData = saveData;
+module.exports.getData = getData;
 module.exports.User = User;
